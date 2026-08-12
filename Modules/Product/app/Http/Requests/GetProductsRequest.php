@@ -1,0 +1,36 @@
+<?php
+
+namespace Modules\Product\Http\Requests;
+
+use App\Exceptions\BusinessException;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+class GetProductsRequest extends FormRequest
+{
+    /**
+     * Get the validation rules that apply to the request.
+     */
+    public function rules(): array
+    {
+        return [
+            'page' => ['nullable', 'integer', 'min:1'],
+            'category_id' => ['nullable', 'integer', Rule::exists('categories', 'id')],
+            'search' => ['nullable', 'string', 'max:255'],
+        ];
+    }
+
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new BusinessException(message: __($validator->errors()->first()), code: 400, errors: [__($validator->errors()->first())]);
+    }
+}
