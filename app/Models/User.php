@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Enums\Provider;
 use App\Enums\Role;
+use App\Traits\CustomerRelationMethods;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -21,7 +22,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class User extends Authenticatable implements HasMedia
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, HasApiTokens, InteractsWithMedia;
+    use HasFactory, Notifiable, HasApiTokens, InteractsWithMedia, CustomerRelationMethods;
 
     /**
      * Get the attributes that should be cast.

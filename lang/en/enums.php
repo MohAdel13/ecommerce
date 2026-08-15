@@ -9,5 +9,10 @@ return [
     'provider' => [
         'google' => 'Google',
         'apple' => 'Apple'
-    ]
+    ],
+
+    'payment_method' => [
+        'cash on delivery' => 'Cash On Delivery',
+        'credit card' => 'Credit Card'
+    ],
 ];

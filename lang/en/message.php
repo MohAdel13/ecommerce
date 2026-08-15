@@ -25,4 +25,10 @@ return [
     'cannot_modify_default_variant' => 'The default variant cannot be modified or deleted.',
     'product_variant_updated' => 'Product variant updated successfully.',
     'product_variant_deleted' => 'Product variant deleted successfully.',
+
+    'added_to_cart' => 'Product added to cart successfully.',
+    'removed_from_cart' => 'Product removed from cart successfully.',
+    'cart_updated' => 'Cart updated successfully.',
+    'sku_not_found' => 'The selected product variant was not found in your cart.',
+    'insufficient_stock' => 'The requested quantity exceeds the available stock.',
 ];

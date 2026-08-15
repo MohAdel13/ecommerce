@@ -25,4 +25,10 @@ return [
     'cannot_modify_default_variant' => 'لا يمكن تعديل أو حذف المتغير الافتراضي.',
     'product_variant_updated' => 'تم تحديث متغير المنتج بنجاح.',
     'product_variant_deleted' => 'تم حذف متغير المنتج بنجاح.',
+
+    'sku_not_found' => 'هذا المنتج غير متوفر',
+    'added_to_cart' => 'تمت إضافة المنتج إلى السلة بنجاح.',
+    'removed_from_cart' => 'تمت إزالة المنتج من السلة بنجاح.',
+    'cart_updated' => 'تم تحديث السلة بنجاح.',
+    'insufficient_stock' => 'الكمية المطلوبة تتجاوز الكمية المتاحة في المخزون.',
 ];

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Cart\Models\CartItem;
 
 // use Modules\Product\Database\Factories\ProductVariantFactory;
 
@@ -28,5 +30,10 @@ class ProductVariant extends Model
     public function attributeValues(): BelongsToMany
     {
         return $this->belongsToMany(AttributeValue::class, 'product_variant_attribute_values', 'product_variant_id', 'attribute_value_id')->withTimestamps();
+    }
+
+    public function cartItems(): HasMany
+    {
+        return $this->hasMany(CartItem::class, 'product_variant_id', 'id');
     }
 }
