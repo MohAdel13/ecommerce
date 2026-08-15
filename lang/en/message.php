@@ -31,4 +31,6 @@ return [
     'cart_updated' => 'Cart updated successfully.',
     'sku_not_found' => 'The selected product variant was not found in your cart.',
     'insufficient_stock' => 'The requested quantity exceeds the available stock.',
+
+    'favourites_list_updated' => 'The Favourite List is Updated Successfully.',
 ];

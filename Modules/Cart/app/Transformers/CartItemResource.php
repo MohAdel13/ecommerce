@@ -18,8 +18,6 @@ class CartItemResource extends JsonResource
         $variant = $this->variant;
         $product = $variant->product;
 
-        Log::info($variant->attributeValues);
-
         return [
             'id' => $product->id,
             'name' => $product->{'name_' . app()->getLocale()},
@@ -29,7 +27,7 @@ class CartItemResource extends JsonResource
             // 'price_after_discount' => (float) $variant->price_after_discount,
             'stock' => (int) $variant->stock,
             'sku' => $variant->sku,
-            // 'is_favourite' => false,
+            'is_favourite' => false,
             // 'average_rating' => $this->average_rating,
 //             'reviews_count' => $this->reviews_count,
             'quantity' => $this->quantity,

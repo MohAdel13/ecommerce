@@ -3,5 +3,6 @@
     "Profile": true,
     "Category": true,
     "Product": true,
-    "Cart": true
+    "Cart": true,
+    "Favourite": true
 }

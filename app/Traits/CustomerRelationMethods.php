@@ -2,13 +2,20 @@
 
 namespace App\Traits;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Cart\Models\Cart;
+use Modules\Favourite\Models\Favourite;
 
 trait CustomerRelationMethods
 {
     public function cart(): HasOne
     {
         return $this->hasOne(Cart::class, 'user_id', 'id');
+    }
+
+    public function favourites(): HasMany
+    {
+        return $this->hasMany(Favourite::class, 'user_id', 'id');
     }
 }
