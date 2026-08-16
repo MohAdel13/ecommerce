@@ -15,4 +15,9 @@ return [
         'cash on delivery' => 'Cash On Delivery',
         'credit card' => 'Credit Card'
     ],
+
+    'discount_type' => [
+        'percentage' => 'Percentage',
+        'fixed' => 'Fixed Amount',
+    ],
 ];

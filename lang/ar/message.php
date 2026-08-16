@@ -42,4 +42,16 @@ return [
     'banner_created' => 'تم إنشاء البانر بنجاح.',
     'banner_updated' => 'تم تحديث البانر بنجاح.',
     'banner_deleted' => 'تم حذف البانر بنجاح.',
+
+    'coupon_create_success' => 'تم إنشاء الكوبون بنجاح.',
+    'coupon_update_success' => 'تم تحديث الكوبون بنجاح.',
+    'coupon_delete_success' => 'تم حذف الكوبون بنجاح.',
+    'coupon_not_found' => 'الكوبون غير موجود.',
+    'coupon_not_available' => 'هذا الكوبون غير متاح حاليًا.',
+    'coupon_usage_limit_reached' => 'لقد وصل هذا الكوبون إلى الحد الأقصى لعدد مرات الاستخدام.',
+    'coupon_user_limit_reached' => 'لقد وصلت إلى الحد الأقصى لعدد مرات استخدام هذا الكوبون.',
+
+    'offer_create_success' => 'تم إنشاء العرض بنجاح.',
+    'offer_update_success' => 'تم تحديث العرض بنجاح.',
+    'offer_delete_success' => 'تم حذف العرض بنجاح.',
 ];

@@ -43,12 +43,12 @@ class Cart extends Model
         });
     }
 
-    // public function getTotalAfterDiscountAttribute(): float
-    // {
-    //     return $this->cartItems->sum(function ($item) {
-    //         return $item->quantity * $item->variant->price_after_discount;
-    //     });
-    // }
+    public function getTotalAfterDiscountAttribute(): float
+    {
+        return $this->cartItems->sum(function ($item) {
+            return $item->quantity * $item->variant->priceAfterDiscount();
+        });
+    }
 
     public function getOutOfStockAttribute(): bool
     {

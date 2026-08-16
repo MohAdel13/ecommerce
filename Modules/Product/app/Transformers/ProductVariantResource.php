@@ -16,8 +16,8 @@ class ProductVariantResource extends JsonResource
             'id' => $this->id,
             'sku' => $this->sku,
             'price' => $this->price,
-            // 'discount' => $this->product->offer,
-            // 'price_after_discount' => $this->price_after_discount,
+            'discount' => $this->discountAmount(),
+            'price_after_discount' => $this->priceAfterDiscount(),
             'stock' => $this->stock,
             'attributes' => $this->attributeValues ? AttributeValueResource::collection($this->attributeValues) : null,
         ];

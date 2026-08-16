@@ -6,5 +6,7 @@
     "Cart": true,
     "Favourite": true,
     "Address": true,
-    "Banner": true
+    "Banner": true,
+    "Offer": true,
+    "Promotion": true
 }

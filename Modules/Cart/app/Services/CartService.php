@@ -8,12 +8,16 @@ use App\Utils\DTO;
 use Modules\Cart\Models\Cart;
 use Modules\Cart\Repositories\CartRepository;
 use Modules\Product\Repositories\ProductVariantRepository;
+use Modules\Promotion\Repositories\CouponRepository;
+use Modules\Promotion\Services\CouponService;
 
 class CartService
 {
     public function __construct(
         private CartRepository $cartRepository,
-        private ProductVariantRepository $productVariantRepository
+        private ProductVariantRepository $productVariantRepository,
+        private CouponRepository $couponRepository,
+        private CouponService $couponService
     ) {
     }
 
@@ -84,26 +88,26 @@ class CartService
 
     public function calculate(Cart $cart, ?string $coupon_code): array
     {
-        // $coupon = null;
-        // if ($coupon_code) {
-        //     $coupon = $this->couponService->getCoupon($coupon_code);
-        // }
+        $coupon = null;
+        if ($coupon_code) {
+            $coupon = $this->couponRepository->findByCode($coupon_code);
+        }
 
         $subtotal = $cart->subtotal;
 
-        // $subtotalAfterProductDiscount = $cart->total_after_discount;
+        $subtotalAfterProductDiscount = $cart->total_after_discount;
 
-        // $couponDiscount = 0;
+        $couponDiscount = 0;
 
-        // if ($coupon) {
-        //     $couponDiscount = $this->couponService->calculateCouponDiscount(
-        //         $coupon,
-        //         $subtotalAfterProductDiscount
-        //     );
+        if ($coupon) {
+            $couponDiscount = $this->couponService->calculateCouponDiscount(
+                $coupon,
+                $subtotalAfterProductDiscount
+            );
 
-        // }
+        }
 
-        // $subtotalAfterDiscount = $subtotalAfterProductDiscount - $couponDiscount;
+        $subtotalAfterDiscount = $subtotalAfterProductDiscount - $couponDiscount;
 
 
         // $tax = $this->settingRepository->getTaxValue();
@@ -123,11 +127,11 @@ class CartService
 
         return [
             'subtotal' => $subtotal,
-            'discount' => 0,
-            'coupon_discount' => 0,
-            'subtotal_after_discount' => $subtotal,
+            'discount' => $subtotal - $subtotalAfterProductDiscount,
+            'coupon_discount' => $couponDiscount,
+            'subtotal_after_discount' => $subtotalAfterDiscount,
             'tax_amount' => 0,
-            'total' => $subtotal
+            'total' => $subtotalAfterDiscount
         ];
     }
 

@@ -36,4 +36,31 @@ class ProductVariant extends Model
     {
         return $this->hasMany(CartItem::class, 'product_variant_id', 'id');
     }
+
+    public function priceAfterDiscount()
+    {
+        $price = (float) $this->price;
+
+        $offer = $this->product->bestOffer();
+
+        if (!$offer) {
+            return $price;
+        }
+
+        return max(
+            0,
+            $price - ($price * $offer->discount_value / 100)
+        );
+    }
+
+    public function discountAmount()
+    {
+        $offer = $this->product->bestOffer();
+
+        if (!$offer) {
+            return 0;
+        }
+
+        return (float) $this->price * ($offer->discount_value / 100);
+    }
 }

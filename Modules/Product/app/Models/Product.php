@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Category\Models\Category;
 use Modules\Favourite\Models\Favourite;
+use Modules\Promotion\Models\Offer;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -62,5 +63,21 @@ class Product extends Model implements HasMedia
     public function favourites(): HasMany
     {
         return $this->hasMany(Favourite::class, 'product_id', 'id');
+    }
+
+    public function offers(): BelongsToMany
+    {
+        return $this->belongsToMany(Offer::class, 'product_offers', 'product_id', 'offer_id')->withTimestamps();
+    }
+
+    public function bestOffer(): ?Offer
+    {
+        return $this->offers()
+            ->where('is_active', true)
+            ->where('starts_at', '<=', now())
+            ->where('ends_at', '>=', now())
+            ->orderByDesc('discount_value')
+            ->orderByDesc('created_at')
+            ->first();
     }
 }

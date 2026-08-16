@@ -15,4 +15,9 @@ return [
         'cash on delivery' => 'كاش عند الاستلام',
         'credit card' => 'بطافة ائتمان'
     ],
+
+    'discount_type' => [
+        'percentage' => 'نسبة مئوية',
+        'fixed' => 'مبلغ ثابت',
+    ],
 ];

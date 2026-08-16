@@ -42,4 +42,16 @@ return [
     'banner_created' => 'Banner created successfully.',
     'banner_updated' => 'Banner updated successfully.',
     'banner_deleted' => 'Banner deleted successfully.',
+
+    'coupon_create_success' => 'Coupon created successfully.',
+    'coupon_update_success' => 'Coupon updated successfully.',
+    'coupon_delete_success' => 'Coupon deleted successfully.',
+    'coupon_not_found' => 'Coupon not found.',
+    'coupon_not_available' => 'This coupon is not currently available.',
+    'coupon_usage_limit_reached' => 'This coupon has reached its maximum usage limit.',
+    'coupon_user_limit_reached' => 'You have reached the maximum usage limit for this coupon.',
+
+    'offer_create_success' => 'Offer created successfully.',
+    'offer_update_success' => 'Offer updated successfully.',
+    'offer_delete_success' => 'Offer deleted successfully.',
 ];
