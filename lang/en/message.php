@@ -33,4 +33,9 @@ return [
     'insufficient_stock' => 'The requested quantity exceeds the available stock.',
 
     'favourites_list_updated' => 'The Favourite List is Updated Successfully.',
+
+    'address_created' => 'Address created successfully.',
+    'address_updated' => 'Address updated successfully.',
+    'address_deleted' => 'Address deleted successfully.',
+    'address_not_found' => 'Address not found.',
 ];

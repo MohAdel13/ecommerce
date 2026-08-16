@@ -33,4 +33,9 @@ return [
     'insufficient_stock' => 'الكمية المطلوبة تتجاوز الكمية المتاحة في المخزون.',
 
     'favourites_list_updated' => 'تم تعديل قائمة المفضلة بنجاح.',
+
+    'address_created' => 'تم إنشاء العنوان بنجاح.',
+    'address_updated' => 'تم تحديث العنوان بنجاح.',
+    'address_deleted' => 'تم حذف العنوان بنجاح.',
+    'address_not_found' => 'العنوان غير موجود.',
 ];

@@ -4,5 +4,6 @@
     "Category": true,
     "Product": true,
     "Cart": true,
-    "Favourite": true
+    "Favourite": true,
+    "Address": true
 }
