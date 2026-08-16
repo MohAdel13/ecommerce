@@ -38,4 +38,8 @@ return [
     'address_updated' => 'Address updated successfully.',
     'address_deleted' => 'Address deleted successfully.',
     'address_not_found' => 'Address not found.',
+
+    'banner_created' => 'Banner created successfully.',
+    'banner_updated' => 'Banner updated successfully.',
+    'banner_deleted' => 'Banner deleted successfully.',
 ];

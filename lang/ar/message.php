@@ -38,4 +38,8 @@ return [
     'address_updated' => 'تم تحديث العنوان بنجاح.',
     'address_deleted' => 'تم حذف العنوان بنجاح.',
     'address_not_found' => 'العنوان غير موجود.',
+
+    'banner_created' => 'تم إنشاء البانر بنجاح.',
+    'banner_updated' => 'تم تحديث البانر بنجاح.',
+    'banner_deleted' => 'تم حذف البانر بنجاح.',
 ];

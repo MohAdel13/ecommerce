@@ -20,6 +20,10 @@ class Address extends Model
     //     // return AddressFactory::new();
     // }
 
+    protected $casts = [
+        'is_default' => 'boolean'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
