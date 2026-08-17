@@ -1,12 +1,13 @@
 <?php
 
-namespace Modules\Cart\Http\Requests;
+namespace Modules\Promotion\Http\Requests;
 
 use App\Exceptions\BusinessException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class checkoutRequest extends FormRequest
+class GetOffersRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,7 +15,7 @@ class checkoutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'coupon_code' => ['string', 'nullable', 'exists:coupons,code']
+            'product_id' => ['nullable', 'int', Rule::exists('products', 'id')]
         ];
     }
 

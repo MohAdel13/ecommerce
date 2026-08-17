@@ -21,6 +21,7 @@ return [
     'product_created' => 'Product created successfully.',
     'product_updated' => 'Product updated successfully.',
     'product_deleted' => 'Product deleted successfully.',
+    'product_offers_sync_success' => 'Product offers synchronized successfully.',
 
     'cannot_modify_default_variant' => 'The default variant cannot be modified or deleted.',
     'product_variant_updated' => 'Product variant updated successfully.',

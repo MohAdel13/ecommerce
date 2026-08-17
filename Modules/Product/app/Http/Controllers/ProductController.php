@@ -11,6 +11,7 @@ use Modules\Product\Http\Requests\AddProductVariantsRequest;
 use Modules\Product\Http\Requests\CreateProductRequest;
 use Modules\Product\Http\Requests\GetProductsRequest;
 use Modules\Product\Http\Requests\SyncProductCategoriesRequest;
+use Modules\Product\Http\Requests\SyncProductOffersRequest;
 use Modules\Product\Http\Requests\UpdateProductRequest;
 use Modules\Product\Models\Product;
 use Modules\Product\Services\ProductService;
@@ -27,7 +28,7 @@ class ProductController extends Controller
 
     public function index(GetProductsRequest $request)
     {
-        $dto = DTO::FromRequest($request, ['category_id', 'search']);
+        $dto = DTO::FromRequest($request, ['category_id', 'search', 'max_offers']);
         $dto->append(['page' => $request->filled('page')]);
 
         $products = $this->productService->index($dto);
@@ -107,6 +108,20 @@ class ProductController extends Controller
         return $this->success(
             message: __('message.product_updated'),
             data: new ProductDetailsResource($product)
+        );
+    }
+
+    public function syncOffers(SyncProductOffersRequest $request, Product $product)
+    {
+        $offerIds = $request->input('offer_ids', []);
+
+        $product = $this->productService->syncOffers($product, $offerIds);
+
+        $data = new ProductDetailsResource($product);
+
+        return $this->success(
+            message: __('message.product_offers_sync_success'),
+            data: $data
         );
     }
 }

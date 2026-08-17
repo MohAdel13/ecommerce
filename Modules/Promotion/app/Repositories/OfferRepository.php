@@ -1,23 +1,27 @@
 <?php
-namespace Modules\Promotion\App\Repositories;
+namespace Modules\Promotion\Repositories;
 
 use Modules\Promotion\Models\Offer;
 
 class OfferRepository
 {
-    public function getAllOffers()
+    public function getAllOffers(?int $product_id)
     {
-        return $this->queryOffers()->get();
+        return $this->queryOffers($product_id)->get();
     }
 
-    public function getPaginatedOffers()
+    public function getPaginatedOffers(?int $product_id)
     {
-        return $this->queryOffers()->paginate(15, ['*'], 'page');
+        return $this->queryOffers($product_id)->paginate(15, ['*'], 'page');
     }
 
-    public function queryOffers()
+    public function queryOffers(?int $product_id)
     {
-        return Offer::latest();
+        return Offer::latest()
+            ->when(
+                $product_id,
+                fn($q) => $q->whereHas('products', fn($q) => $q->where('products.id', $product_id))
+            );
     }
 
     public function create(array $data)

@@ -19,7 +19,9 @@ class CouponResource extends JsonResource
             'type' => $this->discount_type ? new EnumResource($this->discount_type) : null,
             'value' => $this->discount_value,
             'usage_per_user' => $this->usage_per_user,
-            'usage_limit' => $this->usage_limit
+            'usage_limit' => $this->usage_limit,
+            'starts_at' => $this->starts_at,
+            'ends_at' => $this->ends_at,
         ];
     }
 }

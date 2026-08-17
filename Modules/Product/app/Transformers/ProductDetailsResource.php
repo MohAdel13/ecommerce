@@ -5,6 +5,7 @@ namespace Modules\Product\Transformers;
 use App\Http\Resources\MediaResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Promotion\Transformers\OfferResource;
 
 class ProductDetailsResource extends JsonResource
 {
@@ -38,6 +39,7 @@ class ProductDetailsResource extends JsonResource
                 ];
             }),
             'variants' => $this->variants ? ProductVariantResource::collection($this->variants) : null,
+            'offers' => $this->offers ? OfferResource::collection($this->offers) : null
         ];
     }
 }

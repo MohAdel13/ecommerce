@@ -18,6 +18,7 @@ class GetProductsRequest extends FormRequest
             'page' => ['nullable', 'integer', 'min:1'],
             'category_id' => ['nullable', 'integer', Rule::exists('categories', 'id')],
             'search' => ['nullable', 'string', 'max:255'],
+            'max_offers' => ['nullable', 'boolean']
         ];
     }
 

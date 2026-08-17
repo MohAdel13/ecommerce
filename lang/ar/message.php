@@ -21,6 +21,7 @@ return [
     'product_created' => 'تم إنشاء المنتج بنجاح.',
     'product_updated' => 'تم تحديث المنتج بنجاح.',
     'product_deleted' => 'تم حذف المنتج بنجاح.',
+    'product_offers_sync_success' => 'تم مزامنة عروض المنتج بنجاح.',
 
     'cannot_modify_default_variant' => 'لا يمكن تعديل أو حذف المتغير الافتراضي.',
     'product_variant_updated' => 'تم تحديث متغير المنتج بنجاح.',

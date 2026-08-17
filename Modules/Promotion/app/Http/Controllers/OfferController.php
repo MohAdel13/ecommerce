@@ -9,6 +9,7 @@ use App\Traits\ApiResponseTrait;
 use App\Utils\DTO;
 use Illuminate\Http\Request;
 use Modules\Promotion\Http\Requests\CreateOfferRequest;
+use Modules\Promotion\Http\Requests\GetOffersRequest;
 use Modules\Promotion\Http\Requests\UpdateOfferRequest;
 use Modules\Promotion\Models\Offer;
 use Modules\Promotion\Services\OfferService;
@@ -23,9 +24,18 @@ class OfferController extends Controller
     ) {
     }
 
-    public function index(PaginationRequest $request)
+    public function show(Offer $offer)
     {
-        $offers = $this->offerService->index($request->filled('page'));
+        $data = new OfferResource($offer);
+
+        return $this->success(
+            data: $data
+        );
+    }
+
+    public function index(GetOffersRequest $request)
+    {
+        $offers = $this->offerService->index($request->filled('page'), $request->product_id);
 
         $data = $request->filled('page') ? new PaginationCollection($offers, 'offers', OfferResource::class) :
             OfferResource::collection($offers);

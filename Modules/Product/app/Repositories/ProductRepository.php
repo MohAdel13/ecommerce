@@ -9,7 +9,7 @@ class ProductRepository
 {
     public function query(DTO $dto)
     {
-        return Product::query()->with(['categories', 'variants', 'defaultVariant'])
+        return Product::query()->with(['offers', 'categories', 'variants', 'defaultVariant'])
             ->when(
                 $dto->category_id,
                 fn($q) => $q->whereHas(
@@ -25,6 +25,32 @@ class ProductRepository
                         ->orWhere('description_en', 'like', "%{$dto->search}%")
                         ->orWhere('description_ar', 'like', "%{$dto->search}%");
                 })
+            )->when(
+                $dto->max_offers,
+                function ($q) {
+                    $q->withMax(
+                        [
+                            'offers as best_offer_percentage' => function ($q) {
+                                $q->where('is_active', true)
+                                    ->where('starts_at', '<=', now())
+                                    ->where(function ($q) {
+                                        $q->whereNull('ends_at')
+                                            ->orWhere('ends_at', '>=', now());
+                                    });
+                            }
+                        ],
+                        'discount_value'
+                    )
+                        ->whereHas('offers', function ($q) {
+                            $q->where('is_active', true)
+                                ->where('starts_at', '<=', now())
+                                ->where(function ($q) {
+                                    $q->whereNull('ends_at')
+                                        ->orWhere('ends_at', '>=', now());
+                                });
+                        })
+                        ->orderByDesc('best_offer_percentage');
+                }
             );
     }
 
@@ -72,5 +98,10 @@ class ProductRepository
         })->pluck('attribute_id')->unique();
 
         $product->attributes()->sync($attributeIds);
+    }
+
+    public function syncOffers(Product $product, array $offerIds): void
+    {
+        $product->offers()->sync($offerIds);
     }
 }

@@ -11,6 +11,8 @@ class PromotionDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        $this->call(OfferSeeder::class);
+        $this->call(ProductOfferSeeder::class);
+        $this->call(CouponSeeder::class);
     }
 }

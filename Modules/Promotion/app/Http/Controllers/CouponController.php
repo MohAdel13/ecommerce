@@ -25,6 +25,15 @@ class CouponController extends Controller
     {
     }
 
+    public function show(Coupon $coupon)
+    {
+        $data = new CouponResource($coupon);
+
+        return $this->success(
+            data: $data
+        );
+    }
+
     public function index(PaginationRequest $request)
     {
         $coupons = $this->couponService->index($request->filled('page'));

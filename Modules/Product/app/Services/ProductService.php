@@ -92,7 +92,7 @@ class ProductService
                 }
             }
 
-            return $product->fresh()->load(['categories', 'defaultVariant', 'variants.attributeValues.attribute']);
+            return $product->fresh()->load(['offers', 'categories', 'defaultVariant', 'variants.attributeValues.attribute']);
         });
     }
 
@@ -155,7 +155,7 @@ class ProductService
             }
             $this->productRepository->syncProductAttributes($product, $allAttributeIds);
 
-            return $product->fresh()->load(['categories', 'defaultVariant', 'variants.attributeValues.attribute']);
+            return $product->fresh()->load(['offers', 'categories', 'defaultVariant', 'variants.attributeValues.attribute']);
         });
     }
 
@@ -163,6 +163,13 @@ class ProductService
     {
         $this->productRepository->syncCategories($product, $dto->category_ids);
 
-        return $product->fresh()->load(['categories', 'variants', 'defaultVariant']);
+        return $product->fresh()->load(['offers', 'categories', 'variants', 'defaultVariant']);
+    }
+
+    public function syncOffers(Product $product, array $offerIds)
+    {
+        $this->productRepository->syncOffers($product, $offerIds);
+
+        return $product->fresh(['offers', 'categories', 'variants', 'defaultVariant']);
     }
 }

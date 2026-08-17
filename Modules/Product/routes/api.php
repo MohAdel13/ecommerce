@@ -16,6 +16,7 @@ Route::prefix('v1')->group(function () {
         Route::put('/products/update/{product}', 'update');
         Route::delete('/products/delete/{product}', 'delete');
 
+        Route::put('/products/sync-offers/{product}', 'syncOffers');
         Route::put('/products/sync-categories/{product}', 'syncCategories');
         Route::post('/products/add-variants/{product}', 'addVariants');
     });

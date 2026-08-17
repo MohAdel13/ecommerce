@@ -2,7 +2,7 @@
 namespace Modules\Promotion\Services;
 
 use App\Utils\DTO;
-use Modules\Promotion\App\Repositories\OfferRepository;
+use Modules\Promotion\Repositories\OfferRepository;
 use Modules\Promotion\Models\Offer;
 
 class OfferService
@@ -12,11 +12,11 @@ class OfferService
     ) {
     }
 
-    public function index(bool $page)
+    public function index(bool $page, ?int $product_id)
     {
         return $page
-            ? $this->offerRepository->getPaginatedOffers()
-            : $this->offerRepository->getAllOffers();
+            ? $this->offerRepository->getPaginatedOffers($product_id)
+            : $this->offerRepository->getAllOffers($product_id);
     }
 
     public function create(DTO $dto)

@@ -9,6 +9,7 @@ use Modules\Banner\Database\Seeders\BannerDatabaseSeeder;
 use Modules\Category\Database\Seeders\CategoryDatabaseSeeder;
 use Modules\Product\Database\Seeders\ProductDatabaseSeeder;
 use Modules\Product\Database\Seeders\ProductVariantSeeder;
+use Modules\Promotion\Database\Seeders\PromotionDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,7 +23,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(CategoryDatabaseSeeder::class);
         // $this->call(ProductDatabaseSeeder::class);
         // $this->call(ProductVariantSeeder::class);
+        // $this->call(BannerDatabaseSeeder::class);
 
-        $this->call(BannerDatabaseSeeder::class);
+        $this->call(PromotionDatabaseSeeder::class);
     }
 }
