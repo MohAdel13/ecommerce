@@ -19,6 +19,7 @@ Route::prefix('v1')->group(function () {
         Route::put('/products/sync-offers/{product}', 'syncOffers');
         Route::put('/products/sync-categories/{product}', 'syncCategories');
         Route::post('/products/add-variants/{product}', 'addVariants');
+        Route::post('/products/update-tax/{product}', 'updateTax');
     });
 
 

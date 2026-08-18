@@ -22,6 +22,7 @@ return [
     'product_updated' => 'تم تحديث المنتج بنجاح.',
     'product_deleted' => 'تم حذف المنتج بنجاح.',
     'product_offers_sync_success' => 'تم مزامنة عروض المنتج بنجاح.',
+    'product_tax_updated' => 'تم تحديث ضريبة المنتج بنجاح.',
 
     'cannot_modify_default_variant' => 'لا يمكن تعديل أو حذف المتغير الافتراضي.',
     'product_variant_updated' => 'تم تحديث متغير المنتج بنجاح.',
@@ -55,4 +56,8 @@ return [
     'offer_create_success' => 'تم إنشاء العرض بنجاح.',
     'offer_update_success' => 'تم تحديث العرض بنجاح.',
     'offer_delete_success' => 'تم حذف العرض بنجاح.',
+
+    'tax_created' => 'تم إنشاء الضريبة بنجاح.',
+    'tax_updated' => 'تم تحديث الضريبة بنجاح.',
+    'tax_deleted' => 'تم حذف الضريبة بنجاح.',
 ];

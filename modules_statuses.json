@@ -8,5 +8,6 @@
     "Address": true,
     "Banner": true,
     "Offer": true,
-    "Promotion": true
+    "Promotion": true,
+    "Tax": true
 }

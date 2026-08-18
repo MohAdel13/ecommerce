@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Cart\Http\Requests;
+namespace Modules\Tax\Http\Requests;
 
 use App\Exceptions\BusinessException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CheckoutRequest extends FormRequest
+class UpdateTaxRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,7 +14,10 @@ class CheckoutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'coupon_code' => ['string', 'nullable', 'exists:coupons,code']
+            'name_en' => ['required', 'string', 'max:255'],
+            'name_ar' => ['required', 'string', 'max:255'],
+            'rate' => ['required', 'numeric', 'min:0', 'max:100'],
+            'is_active' => ['required', 'boolean'],
         ];
     }
 

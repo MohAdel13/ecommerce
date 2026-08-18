@@ -22,6 +22,7 @@ return [
     'product_updated' => 'Product updated successfully.',
     'product_deleted' => 'Product deleted successfully.',
     'product_offers_sync_success' => 'Product offers synchronized successfully.',
+    'product_tax_updated' => 'Product tax updated successfully.',
 
     'cannot_modify_default_variant' => 'The default variant cannot be modified or deleted.',
     'product_variant_updated' => 'Product variant updated successfully.',
@@ -55,4 +56,8 @@ return [
     'offer_create_success' => 'Offer created successfully.',
     'offer_update_success' => 'Offer updated successfully.',
     'offer_delete_success' => 'Offer deleted successfully.',
+
+    'tax_created' => 'Tax created successfully.',
+    'tax_updated' => 'Tax updated successfully.',
+    'tax_deleted' => 'Tax deleted successfully.',
 ];

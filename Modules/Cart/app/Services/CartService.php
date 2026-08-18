@@ -23,7 +23,7 @@ class CartService
 
     public function getUserCart(User $user)
     {
-        return $this->cartRepository->getOrCreateCart($user->id)->load('cartItems.variant.product');
+        return $this->cartRepository->getOrCreateCart($user->id)->load('cartItems.variant.product.tax');
     }
 
     public function add(DTO $dto)
@@ -109,12 +109,11 @@ class CartService
 
         $subtotalAfterDiscount = $subtotalAfterProductDiscount - $couponDiscount;
 
-
-        // $tax = $this->settingRepository->getTaxValue();
-        // $taxRate = $tax ? $tax->value_en : 0;
-
-
-        // $tax = $subtotalAfterDiscount * ($taxRate / 100);
+        $taxAmount = $this->calculateTax(
+            $cart,
+            $couponDiscount,
+            $subtotalAfterProductDiscount
+        );
 
         // return [
         //     'subtotal' => $subtotal,
@@ -130,13 +129,33 @@ class CartService
             'discount' => $subtotal - $subtotalAfterProductDiscount,
             'coupon_discount' => $couponDiscount,
             'subtotal_after_discount' => $subtotalAfterDiscount,
-            'tax_amount' => 0,
-            'total' => $subtotalAfterDiscount
+            'tax_amount' => $taxAmount,
+            'total' => $subtotalAfterDiscount + $taxAmount,
         ];
     }
 
     public function getPaymentMethods(): array
     {
         return PaymentMethod::cases();
+    }
+
+    private function calculateTax(Cart $cart, float $couponDiscount, float $subtotalAfterProductDiscount)
+    {
+        if ($subtotalAfterProductDiscount <= 0) {
+            return 0;
+        }
+
+        return $cart->cartItems->sum(function ($item) use ($couponDiscount, $subtotalAfterProductDiscount) {
+
+            $itemAmount = $item->quantity * $item->variant->priceAfterDiscount();
+
+            $itemCouponDiscount = ($itemAmount / $subtotalAfterProductDiscount) * $couponDiscount;
+
+            $taxableAmount = $itemAmount - $itemCouponDiscount;
+
+            $taxRate = $item->variant->product->tax?->rate ?? 0;
+
+            return $taxableAmount * ($taxRate / 100);
+        });
     }
 }

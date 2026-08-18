@@ -5,18 +5,20 @@ namespace Modules\Product\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Category\Models\Category;
 use Modules\Favourite\Models\Favourite;
 use Modules\Promotion\Models\Offer;
+use Modules\Tax\Models\Tax;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 // use Modules\Product\Database\Factories\ProductFactory;
 
-#[Fillable(['name_en', 'name_ar', 'description_en', 'description_ar', 'features'])]
+#[Fillable(['name_en', 'name_ar', 'description_en', 'description_ar', 'features', 'tax_id'])]
 class Product extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
@@ -79,5 +81,10 @@ class Product extends Model implements HasMedia
             ->orderByDesc('discount_value')
             ->orderByDesc('created_at')
             ->first();
+    }
+
+    public function tax(): BelongsTo
+    {
+        return $this->belongsTo(Tax::class, 'tax_id', 'id');
     }
 }

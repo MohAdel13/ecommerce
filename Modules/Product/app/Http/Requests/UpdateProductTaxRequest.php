@@ -1,12 +1,14 @@
 <?php
 
-namespace Modules\Cart\Http\Requests;
+namespace Modules\Product\Http\Requests;
 
 use App\Exceptions\BusinessException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Modules\Tax\Models\Tax;
 
-class CheckoutRequest extends FormRequest
+class UpdateProductTaxRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,7 +16,7 @@ class CheckoutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'coupon_code' => ['string', 'nullable', 'exists:coupons,code']
+            'tax_id' => ['required', 'integer', Rule::exists(Tax::class, 'id')->where('is_active', true)],
         ];
     }
 

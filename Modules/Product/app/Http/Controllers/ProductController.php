@@ -13,6 +13,7 @@ use Modules\Product\Http\Requests\GetProductsRequest;
 use Modules\Product\Http\Requests\SyncProductCategoriesRequest;
 use Modules\Product\Http\Requests\SyncProductOffersRequest;
 use Modules\Product\Http\Requests\UpdateProductRequest;
+use Modules\Product\Http\Requests\UpdateProductTaxRequest;
 use Modules\Product\Models\Product;
 use Modules\Product\Services\ProductService;
 use Modules\Product\Transformers\ProductDetailsResource;
@@ -121,6 +122,18 @@ class ProductController extends Controller
 
         return $this->success(
             message: __('message.product_offers_sync_success'),
+            data: $data
+        );
+    }
+
+    public function updateTax(UpdateProductTaxRequest $request, Product $product)
+    {
+        $product = $this->productService->updateTax($product, $request->tax_id);
+
+        $data = new ProductResource($product);
+
+        return $this->success(
+            message: __('message.product_tax_updated'),
             data: $data
         );
     }

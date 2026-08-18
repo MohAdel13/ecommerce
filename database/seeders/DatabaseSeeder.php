@@ -10,6 +10,7 @@ use Modules\Category\Database\Seeders\CategoryDatabaseSeeder;
 use Modules\Product\Database\Seeders\ProductDatabaseSeeder;
 use Modules\Product\Database\Seeders\ProductVariantSeeder;
 use Modules\Promotion\Database\Seeders\PromotionDatabaseSeeder;
+use Modules\Tax\Database\Seeders\TaxDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,7 +25,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(ProductDatabaseSeeder::class);
         // $this->call(ProductVariantSeeder::class);
         // $this->call(BannerDatabaseSeeder::class);
-
-        $this->call(PromotionDatabaseSeeder::class);
+        // $this->call(PromotionDatabaseSeeder::class);
+        $this->call(TaxDatabaseSeeder::class);
     }
 }

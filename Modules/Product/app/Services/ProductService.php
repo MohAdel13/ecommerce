@@ -172,4 +172,9 @@ class ProductService
 
         return $product->fresh(['offers', 'categories', 'variants', 'defaultVariant']);
     }
+
+    public function updateTax(Product $product, int $tax_id)
+    {
+        return $this->productRepository->update($product, ['tax_id' => $tax_id]);
+    }
 }

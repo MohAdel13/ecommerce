@@ -9,7 +9,7 @@ use App\Utils\DTO;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Cart\Http\Requests\AddToCartRequest;
-use Modules\Cart\Http\Requests\checkoutRequest;
+use Modules\Cart\Http\Requests\CheckoutRequest;
 use Modules\Cart\Http\Requests\RemoveFromCartRequest;
 use Modules\Cart\Services\CartService;
 use Modules\Cart\Transformers\CartResource;
@@ -22,7 +22,7 @@ class CartController extends Controller
     {
     }
 
-    public function index(checkoutRequest $request)
+    public function index(CheckoutRequest $request)
     {
         $cart = $this->cartService->getUserCart(Auth::user());
 
