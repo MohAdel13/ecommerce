@@ -20,4 +20,18 @@ return [
         'percentage' => 'نسبة مئوية',
         'fixed' => 'مبلغ ثابت',
     ],
+
+    'order_status' => [
+        'pending' => 'قيد الانتظار',
+        'processing' => 'قيد التجهيز',
+        'shipped' => 'تم الشحن',
+        'delivered' => 'تم التوصيل',
+        'cancelled' => 'ملغى',
+    ],
+
+    'payment_status' => [
+        'pending' => 'قيد الانتظار',
+        'paid' => 'تم الدفع',
+        'cancelled' => 'ملغى',
+    ],
 ];

@@ -47,4 +47,12 @@ class ProductVariantRepository
     {
         $variant->attributeValues()->syncWithoutDetaching($valueIds);
     }
+
+    public function lockProductVariants(array $ids)
+    {
+        return ProductVariant::whereIn('id', $ids)
+            ->lockForUpdate()
+            ->get()
+            ->keyBy('id');
+    }
 }

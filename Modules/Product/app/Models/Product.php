@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Category\Models\Category;
 use Modules\Favourite\Models\Favourite;
+use Modules\Order\Models\OrderItem;
 use Modules\Promotion\Models\Offer;
 use Modules\Tax\Models\Tax;
 use Spatie\MediaLibrary\HasMedia;

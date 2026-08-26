@@ -60,4 +60,11 @@ return [
     'tax_created' => 'Tax created successfully.',
     'tax_updated' => 'Tax updated successfully.',
     'tax_deleted' => 'Tax deleted successfully.',
+
+    'cart_is_empty' => 'Cart is Empty.',
+
+    'order_create_succeeded' => 'Order created successfully.',
+    'order_update_succeeded' => 'Order updated successfully.',
+    'order_delete_succeeded' => 'Order deleted successfully.',
+    'cannot_cancel_order_after_shipping' => 'The order cannot be cancelled after it has been shipped.',
 ];

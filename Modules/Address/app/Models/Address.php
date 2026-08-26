@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Order\Models\Order;
 
 // use Modules\Address\Database\Factories\AddressFactory;
 
@@ -27,5 +29,10 @@ class Address extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'address_id', 'id');
     }
 }

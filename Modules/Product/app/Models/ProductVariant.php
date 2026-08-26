@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Cart\Models\CartItem;
+use Modules\Order\Models\OrderItem;
 
 // use Modules\Product\Database\Factories\ProductVariantFactory;
 
@@ -62,5 +63,10 @@ class ProductVariant extends Model
         }
 
         return (float) $this->price * ($offer->discount_value / 100);
+    }
+
+    public function OrderItems(): HasMany
+    {
+        return $this->hasMany(OrderItem::class, 'product_variant_id', 'id');
     }
 }

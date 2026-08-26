@@ -60,4 +60,11 @@ return [
     'tax_created' => 'تم إنشاء الضريبة بنجاح.',
     'tax_updated' => 'تم تحديث الضريبة بنجاح.',
     'tax_deleted' => 'تم حذف الضريبة بنجاح.',
+
+    'cart_is_empty' => 'السلة فارغة.',
+
+    'order_create_succeeded' => 'تم إنشاء الطلب بنجاح.',
+    'order_update_succeeded' => 'تم تحديث الطلب بنجاح.',
+    'order_delete_succeeded' => 'تم حذف الطلب بنجاح.',
+    'cannot_cancel_order_after_shipping' => 'لا يمكن إلغاء الطلب بعد شحنه.',
 ];

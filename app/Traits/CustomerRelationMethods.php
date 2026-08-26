@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Address\Models\Address;
 use Modules\Cart\Models\Cart;
 use Modules\Favourite\Models\Favourite;
+use Modules\Order\Models\Order;
 use Modules\Promotion\Models\Coupon;
 
 trait CustomerRelationMethods
@@ -30,5 +31,10 @@ trait CustomerRelationMethods
     public function coupons(): BelongsToMany
     {
         return $this->belongsToMany(Coupon::class, 'user_coupons', 'user_id', 'coupon_id')->withTimestamps();
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'user_id', 'id');
     }
 }

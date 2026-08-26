@@ -9,5 +9,7 @@
     "Banner": true,
     "Offer": true,
     "Promotion": true,
-    "Tax": true
+    "Tax": true,
+    "Order": true,
+    "Payment": true
 }
