@@ -7,9 +7,11 @@ use App\Http\Resources\PaginationCollection;
 use App\Traits\ApiResponseTrait;
 use App\Utils\DTO;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Modules\Product\Http\Requests\AddProductVariantsRequest;
 use Modules\Product\Http\Requests\CreateProductRequest;
 use Modules\Product\Http\Requests\GetProductsRequest;
+use Modules\Product\Http\Requests\ReviewProductRequest;
 use Modules\Product\Http\Requests\SyncProductCategoriesRequest;
 use Modules\Product\Http\Requests\SyncProductOffersRequest;
 use Modules\Product\Http\Requests\UpdateProductRequest;
@@ -135,6 +137,17 @@ class ProductController extends Controller
         return $this->success(
             message: __('message.product_tax_updated'),
             data: $data
+        );
+    }
+
+    public function review(Product $product, ReviewProductRequest $request)
+    {
+        $dto = DTO::fromRequest($request, ['rating', 'comment'], Auth::user());
+
+        $this->productService->review($product, $dto);
+
+        return $this->success(
+            message: __('message.review_saved_succeeded')
         );
     }
 }

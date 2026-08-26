@@ -7,13 +7,15 @@ use Modules\Product\Models\Product;
 use Modules\Product\Repositories\AttributeRepository;
 use Modules\Product\Repositories\ProductRepository;
 use Modules\Product\Repositories\ProductVariantRepository;
+use Modules\Product\Repositories\ReviewRepository;
 
 class ProductService
 {
     public function __construct(
         private ProductRepository $productRepository,
         private ProductVariantRepository $productVariantRepository,
-        private AttributeRepository $attributeRepository
+        private AttributeRepository $attributeRepository,
+        private ReviewRepository $reviewRepository
     ) {
     }
 
@@ -176,5 +178,25 @@ class ProductService
     public function updateTax(Product $product, int $tax_id)
     {
         return $this->productRepository->update($product, ['tax_id' => $tax_id]);
+    }
+
+    public function review(Product $product, DTO $dto)
+    {
+        $review = $this->reviewRepository->findUserReview($product->id, $dto->user->id);
+        if ($review) {
+            $this->reviewRepository->update($review, [
+                'rating' => $dto->rating,
+                'comment' => $dto->comment,
+            ]);
+
+            return;
+        }
+
+        $this->reviewRepository->create([
+            'product_id' => $product->id,
+            'user_id' => $dto->user->id,
+            'rating' => $dto->rating,
+            'comment' => $dto->comment,
+        ]);
     }
 }

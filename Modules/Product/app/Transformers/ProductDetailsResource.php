@@ -29,8 +29,8 @@ class ProductDetailsResource extends JsonResource
             'stock' => (int) $defaultVariant->stock,
             'sku' => $defaultVariant->sku,
             'is_favourite' => $is_favourite,
-            // 'average_rating' => $this->average_rating,
-            // 'reviews_count' => $this->reviews_count,
+            'average_rating' => $this->average_rating,
+            'reviews_count' => $this->reviews_count,
             'images' => $this->images ? MediaResource::collection($this->images) : null,
             'features' => collect($this->features)->map(function ($feature) {
                 return [

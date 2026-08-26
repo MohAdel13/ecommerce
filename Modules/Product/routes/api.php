@@ -11,6 +11,10 @@ Route::prefix('v1')->group(function () {
         Route::get('/products/{product}', 'show');
     });
 
+    Route::middleware(['auth:sanctum'])->controller(ProductController::class)->group(function () {
+        Route::post('/products/review/{product}', 'review');
+    });
+
     Route::middleware(['auth:sanctum', 'role:admin'])->controller(ProductController::class)->group(function () {
         Route::post('/products/create', 'create');
         Route::put('/products/update/{product}', 'update');
