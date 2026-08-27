@@ -34,4 +34,11 @@ return [
         'paid' => 'تم الدفع',
         'cancelled' => 'ملغى',
     ],
+
+    'ticket_status' => [
+        'pending' => 'قيد الانتظار',
+        'open' => 'مفتوحة',
+        'resolved' => 'تم الحل',
+        'closed' => 'مغلقة',
+    ],
 ];

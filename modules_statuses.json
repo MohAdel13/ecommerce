@@ -11,5 +11,6 @@
     "Promotion": true,
     "Tax": true,
     "Order": true,
-    "Payment": true
+    "Payment": true,
+    "Ticket": true
 }

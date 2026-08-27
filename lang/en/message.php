@@ -67,4 +67,11 @@ return [
     'order_update_succeeded' => 'Order updated successfully.',
     'order_delete_succeeded' => 'Order deleted successfully.',
     'cannot_cancel_order_after_shipping' => 'The order cannot be cancelled after it has been shipped.',
+
+    'ticket_created' => 'Ticket created successfully.',
+    'ticket_updated' => 'Ticket updated successfully.',
+    'ticket_deleted' => 'Ticket deleted successfully.',
+
+    'message_created' => 'Message sent successfully.',
+    'message_deleted' => 'Message deleted successfully.',
 ];

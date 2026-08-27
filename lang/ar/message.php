@@ -67,4 +67,11 @@ return [
     'order_update_succeeded' => 'تم تحديث الطلب بنجاح.',
     'order_delete_succeeded' => 'تم حذف الطلب بنجاح.',
     'cannot_cancel_order_after_shipping' => 'لا يمكن إلغاء الطلب بعد شحنه.',
+
+    'ticket_created' => 'تم إنشاء التذكرة بنجاح.',
+    'ticket_updated' => 'تم تحديث التذكرة بنجاح.',
+    'ticket_deleted' => 'تم حذف التذكرة بنجاح.',
+
+    'message_created' => 'تم إرسال الرسالة بنجاح.',
+    'message_deleted' => 'تم حذف الرسالة بنجاح.',
 ];

@@ -34,4 +34,11 @@ return [
         'paid' => 'Paid',
         'cancelled' => 'Cancelled',
     ],
+
+    'ticket_status' => [
+        'pending' => 'Pending',
+        'open' => 'Open',
+        'resolved' => 'Resolved',
+        'closed' => 'Closed',
+    ],
 ];

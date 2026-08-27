@@ -10,6 +10,7 @@ use Modules\Cart\Models\Cart;
 use Modules\Favourite\Models\Favourite;
 use Modules\Order\Models\Order;
 use Modules\Promotion\Models\Coupon;
+use Modules\Ticket\Models\Ticket;
 
 trait CustomerRelationMethods
 {
@@ -36,5 +37,10 @@ trait CustomerRelationMethods
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class, 'user_id', 'id');
+    }
+
+    public function tickets(): HasMany
+    {
+        return $this->hasMany(Ticket::class, 'user_id', 'id');
     }
 }
