@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Address\Models\Address;
 use Modules\Cart\Models\Cart;
 use Modules\Favourite\Models\Favourite;
+use Modules\Notification\Models\Notification;
 use Modules\Order\Models\Order;
 use Modules\Promotion\Models\Coupon;
 use Modules\Ticket\Models\Ticket;
@@ -42,5 +43,10 @@ trait CustomerRelationMethods
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'user_id', 'id');
+    }
+
+    public function userNotifications(): HasMany
+    {
+        return $this->hasMany(Notification::class, 'user_id', 'id');
     }
 }

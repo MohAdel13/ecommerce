@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Modules\Cart\Models\Cart;
 use Modules\Cart\Repositories\CartRepository;
 use Modules\Cart\Services\CartService;
+use Modules\Notification\Services\NotificationService;
 use Modules\Order\Models\Order;
 use Modules\Order\Repositories\OrderItemRepository;
 use Modules\Order\Repositories\OrderRepository;
@@ -30,7 +31,8 @@ class OrderService
         private CartService $cartService,
         private ProductVariantRepository $productVariantRepository,
         private OrderItemRepository $orderItemRepository,
-        private PaymentRepository $paymentRepository
+        private PaymentRepository $paymentRepository,
+        private NotificationService $notificationService
     ) {
     }
 
@@ -53,7 +55,6 @@ class OrderService
         }
 
         $dto->append(['status' => OrderStatus::Pending, 'user_id' => $dto->user->id]);
-
         return DB::transaction(function () use ($dto, $cart, $coupon) {
             $variantIds = $cart->cartItems
                 ->pluck('product_variant_id')
@@ -85,15 +86,52 @@ class OrderService
 
             $this->cartService->removeAll($dto->user);
 
-            // $this->sendNotification($order, $dto->user);
-
+            $this->notificationService->sendNotification(
+                new DTO([
+                    'user_id' => $dto->user->id,
+                    'fcm_token' => $dto->user->fcm_token,
+                    'title' => __('notifications.order_created.title'),
+                    'body' => __('notifications.order_created.body', [
+                        'order' => $order->transaction_id,
+                    ]),
+                    'notifiable_id' => $order->id,
+                    'notifiable_type' => 'order',
+                ])
+            );
             return $payment;
         });
     }
 
     public function update(Order $order, DTO $dto)
     {
-        return $this->orderRepository->updateOrder($order, $dto->getData());
+        $return = $this->orderRepository->updateOrder($order, $dto->getData());
+
+        $status = $dto->getData()['status'] ?? null;
+
+        $notificationKey = match ($status) {
+            OrderStatus::Processing->value => 'notifications.order_confirmed',
+            OrderStatus::Shipped->value => 'notifications.order_shipped',
+            OrderStatus::Delivered->value => 'notifications.order_delivered',
+            OrderStatus::Cancelled->value => 'notifications.order_cancelled',
+            default => null,
+        };
+
+        if ($notificationKey) {
+            $this->notificationService->sendNotification(
+                new DTO([
+                    'user_id' => $order->user_id,
+                    'fcm_token' => $order->user->fcm_token,
+                    'title' => __("$notificationKey.title"),
+                    'body' => __("$notificationKey.body", [
+                        'order' => $order->transaction_id,
+                    ]),
+                    'notifiable_id' => $order->id,
+                    'notifiable_type' => 'order',
+                ])
+            );
+        }
+
+        return $return;
     }
 
     public function delete(Order $order)
@@ -111,7 +149,22 @@ class OrderService
 
         $this->paymentRepository->update($order->payment, ['status' => PaymentStatus::Cancelled]);
 
-        return $this->orderRepository->updateOrder($order, ['status' => OrderStatus::Cancelled]);
+        $return = $this->orderRepository->updateOrder($order, ['status' => OrderStatus::Cancelled]);
+
+        $this->notificationService->sendNotification(
+            new DTO([
+                'user_id' => $user->id,
+                'fcm_token' => $user->fcm_token,
+                'title' => __('notifications.order_cancelled.title'),
+                'body' => __('notifications.order_cancelled.body', [
+                    'order' => $order->transaction_id,
+                ]),
+                'notifiable_id' => $order->id,
+                'notifiable_type' => 'order',
+            ])
+        );
+
+        return $return;
     }
 
     public function statuses()

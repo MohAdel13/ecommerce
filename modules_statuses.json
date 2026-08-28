@@ -12,5 +12,7 @@
     "Tax": true,
     "Order": true,
     "Payment": true,
-    "Ticket": true
+    "Ticket": true,
+    "Notification": true,
+    "User": true
 }

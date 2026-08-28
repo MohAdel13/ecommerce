@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Address\Models\Address;
+use Modules\Notification\Models\Notification;
 use Modules\Payment\Models\Payment;
 
 // use Modules\Order\Database\Factories\OrderFactory;
@@ -47,5 +49,10 @@ class Order extends Model
     public function payment(): HasOne
     {
         return $this->hasOne(Payment::class, 'order_id', 'id');
+    }
+
+    public function notifications(): MorphMany
+    {
+        return $this->morphMany(Notification::class, 'notifiable');
     }
 }

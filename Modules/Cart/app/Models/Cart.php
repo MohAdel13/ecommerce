@@ -31,6 +31,11 @@ class Cart extends Model
         return $this->hasMany(CartItem::class, 'cart_id', 'id');
     }
 
+    public function getIsEmptyAttribute()
+    {
+        return $this->cartItems->count() === 0;
+    }
+
     public function getTotalItemsAttribute(): int
     {
         return $this->cartItems->sum('quantity');

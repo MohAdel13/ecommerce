@@ -19,7 +19,7 @@ use Modules\Ticket\Models\Message;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-#[Fillable(['name', 'email', 'password', 'phone', 'uuid', 'provider', 'role'])]
+#[Fillable(['name', 'email', 'password', 'phone', 'uuid', 'provider', 'role', 'fcm_token'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements HasMedia
 {
