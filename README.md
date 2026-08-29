@@ -1,7 +1,7 @@
 # 🛒 Modular E-Commerce RESTful API
 
 [![PHP Version](https://img.shields.io/badge/PHP-8.3%2B-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
-[![Laravel Framework](https://img.shields.io/badge/Laravel-11%2F12-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![Laravel Framework](https://img.shields.io/badge/Laravel-13-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
 [![Architecture](https://img.shields.io/badge/Architecture-Modular%20Domain%20Monolith-blue?style=for-the-badge)](https://nwidart.com/laravel-modules)
 [![Real-Time](https://img.shields.io/badge/Real--Time-Laravel%20Reverb-orange?style=for-the-badge&logo=socketdotio&logoColor=white)](https://reverb.laravel.com)
 [![API Documentation](https://img.shields.io/badge/Docs-Dedoc%20Scramble-00D1B2?style=for-the-badge)](https://scramble.dedoc.co)
@@ -78,7 +78,7 @@ HttpRequest
 
 ## 🛠️ Tech Stack & Dependencies
 
-- **Core Framework**: Laravel 11 / 12, PHP 8.3+
+- **Core Framework**: Laravel 13, PHP 8.3+
 - **Modularity**: [`nwidart/laravel-modules`](https://github.com/nWidart/laravel-modules)
 - **Authentication**: [`laravel/sanctum`](https://github.com/laravel/sanctum)
 - **Real-Time WebSockets**: [`laravel/reverb`](https://github.com/laravel/reverb)
@@ -104,8 +104,8 @@ HttpRequest
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/ecommerce-api.git
-   cd ecommerce-api
+   git clone https://github.com/MohAdel13/ecommerce.git
+   cd ecommerce
    ```
 
 2. **Install PHP and Node dependencies:**
