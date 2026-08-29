@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Modules\Auth\Http\Requests\LoginRequest;
 use Modules\Auth\Http\Requests\RegisterRequest;
 use Modules\Auth\Http\Requests\SocialAuthRequest;
+use Modules\Auth\Http\Requests\UpdateFcmRequest;
 use Modules\Auth\Services\AuthService;
 
 class AuthController extends Controller
@@ -72,5 +73,14 @@ class AuthController extends Controller
         return $this->success(
             message: __('message.logout_success')
         );
+    }
+
+    public function updateFcm(UpdateFcmRequest $request)
+    {
+        $dto = DTO::FromRequest($request, ['fcm_token'], Auth::user());
+
+        $this->authService->updateFcm($dto);
+
+        return $this->success();
     }
 }

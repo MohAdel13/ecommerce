@@ -28,6 +28,6 @@ class CreateTicketRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        throw new BusinessException(message: $validator->errors()->first(), code: 400, errors: [$validator->errors()->first()]);
+        throw new BusinessException(message: __($validator->errors()->first()), code: 400, errors: [__($validator->errors()->first())]);
     }
 }

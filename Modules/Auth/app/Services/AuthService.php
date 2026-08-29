@@ -8,12 +8,17 @@ use App\Models\User;
 use App\Utils\DTO;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Modules\User\Repositories\UserRepository;
 
 class AuthService
 {
+    public function __construct(private UserRepository $userRepository)
+    {
+    }
+
     public function login(DTO $dto)
     {
-        $user = User::where('email', $dto->email)->first();
+        $user = $this->userRepository->findByEmail($dto->email);
         if (!$user) {
             throw new BusinessException(message: __('message.wrong_credintials'), code: 400, errors: [__('message.wrong_credintials')]);
         }
@@ -27,7 +32,7 @@ class AuthService
 
     public function socialAuth(DTO $dto)
     {
-        $user = User::where('email', $dto->email)->first();
+        $user = $this->userRepository->findByEmail($dto->email);
 
         if ($user) {
             if (($user->uuid !== $dto->uuid || $user->provider !== $dto->provider)) {
@@ -37,36 +42,30 @@ class AuthService
             return $this->authenticate($user);
         }
 
-        $user = User::create([
-            'name' => $dto->name,
-            'email' => $dto->email,
-            'phone' => $dto->phone,
-            'provider' => $dto->provider,
-            'uuid' => $dto->uuid,
-            'role' => Role::Customer,
-        ]);
+        $dto->append(['role' => Role::Customer]);
+
+        $user = $this->userRepository->create($dto->getData());
 
         return $this->authenticate($user);
     }
 
     public function register(DTO $dto)
     {
-        $user = User::create([
-            'name' => $dto->name,
-            'email' => $dto->email,
-            'phone' => $dto->phone,
-            'password' => Hash::make($dto->password),
-            'role' => Role::Customer,
-        ]);
+        $dto->append(['role' => Role::Customer]);
+        $data = $dto->getData();
+
+        $data['password'] = Hash::make($dto->password);
+
+        $user = $this->userRepository->create($data);
 
         return $this->authenticate($user);
     }
 
     private function authenticate(User $user)
     {
-        $user->tokens()->delete();
+        $this->logout($user);
 
-        $token = $user->createToken($user->name)->plainTextToken;
+        $token = $this->userRepository->createToken($user);
 
         return [
             'user' => $user,
@@ -76,6 +75,11 @@ class AuthService
 
     public function logout(User $user)
     {
-        $user->tokens()->delete();
+        $this->userRepository->deleteTokens($user);
+    }
+
+    public function updateFcm(DTO $dto)
+    {
+        $this->userRepository->update($dto->user, $dto->getData());
     }
 }

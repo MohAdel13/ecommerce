@@ -172,6 +172,11 @@ class OrderService
         return $this->orderRepository->getStatuses();
     }
 
+    public function getPaymentMethods()
+    {
+        return $this->paymentRepository->methods();
+    }
+
     private function createOrderItems(int $order_id, Cart $cart, $variants)
     {
         $orderItems = $cart->cartItems;

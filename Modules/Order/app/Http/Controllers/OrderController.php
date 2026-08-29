@@ -98,6 +98,17 @@ class OrderController extends Controller
         );
     }
 
+    public function getPaymentMethods()
+    {
+        $payment_methods = $this->orderService->getPaymentMethods();
+
+        $data = EnumResource::collection($payment_methods);
+
+        return $this->success(
+            data: $data
+        );
+    }
+
     public function cancel(Order $order)
     {
         $order = new OrderResource($this->orderService->cancel($order, Auth::user()));

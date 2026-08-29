@@ -52,19 +52,4 @@ class OrderRepository
     {
         return OrderStatus::cases();
     }
-
-    // public function createOrderItem(array $data)
-    // {
-    //     return OrderItem::create($data);
-    // }
-
-    // public function findProductVariant(int $id)
-    // {
-    //     return ProductVariant::find($id);
-    // }
-
-    // public function findPaymentMethod(int $payment_method_id)
-    // {
-    //     return Lookup::find($payment_method_id);
-    // }
 }

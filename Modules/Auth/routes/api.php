@@ -10,6 +10,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/register', 'register');
 
         Route::middleware('auth:sanctum')->group(function () {
+            Route::post('/fcm', 'updateFcm');
             Route::post('/logout', 'logout');
         });
     });

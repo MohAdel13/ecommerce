@@ -2,6 +2,7 @@
 
 namespace Modules\Payment\Repositories;
 
+use App\Enums\PaymentMethod;
 use Modules\Payment\Models\Payment;
 
 class PaymentRepository
@@ -23,5 +24,10 @@ class PaymentRepository
     public function delete(Payment $payment)
     {
         return $payment->delete();
+    }
+
+    public function methods()
+    {
+        return PaymentMethod::cases();
     }
 }

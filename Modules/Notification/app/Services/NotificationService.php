@@ -6,10 +6,11 @@ use App\Models\User;
 use App\Utils\DTO;
 use Modules\Notification\Jobs\SendNotificationJob;
 use Modules\Notification\Repositories\NotificationRepository;
+use Modules\User\Repositories\UserRepository;
 
 class NotificationService
 {
-    public function __construct(private NotificationRepository $notificationRepository)
+    public function __construct(private NotificationRepository $notificationRepository, private UserRepository $userRepository)
     {
     }
 
@@ -35,7 +36,7 @@ class NotificationService
         ]);
 
         if (!$dto->user_id) {
-            $user = $this->notificationRepository->findUserByFcmToken($dto->fcm_token);
+            $user = $this->userRepository->findByFcm($dto->fcm_token);
             $dto->append([
                 'user_id' => $user->id,
             ]);

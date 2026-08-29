@@ -74,4 +74,8 @@ return [
 
     'message_created' => 'Message sent successfully.',
     'message_deleted' => 'Message deleted successfully.',
+
+    'user_created' => 'User created successfully.',
+    'user_updated' => 'User updated successfully.',
+    'user_deleted' => 'User deleted successfully.',
 ];
