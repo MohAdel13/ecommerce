@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Address\Models\Address;
 use Modules\Notification\Models\Notification;
+use Modules\Order\Observers\OrderObserver;
 use Modules\Payment\Models\Payment;
 
 // use Modules\Order\Database\Factories\OrderFactory;
@@ -26,6 +27,11 @@ class Order extends Model
     // {
     //     // return OrderFactory::new();
     // }
+
+    protected static function booted()
+    {
+        static::observe(new OrderObserver());
+    }
 
     protected $casts = [
         'status' => OrderStatus::class

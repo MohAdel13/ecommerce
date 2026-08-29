@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Cart\Models\CartItem;
 use Modules\Order\Models\OrderItem;
+use Modules\Product\Observers\ProductObserver;
 
 // use Modules\Product\Database\Factories\ProductVariantFactory;
 
@@ -22,6 +23,11 @@ class ProductVariant extends Model
     // {
     //     // return ProductVariantFactory::new();
     // }
+
+    protected static function booted()
+    {
+        static::observe(new ProductObserver());
+    }
 
     public function product(): BelongsTo
     {

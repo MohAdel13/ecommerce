@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Order\Observers\OrderObserver;
 use Modules\Product\Models\ProductVariant;
 
 // use Modules\Order\Database\Factories\OrderItemFactory;
@@ -30,6 +31,11 @@ class OrderItem extends Model
     // {
     //     // return OrderItemFactory::new();
     // }
+
+    protected static function booted()
+    {
+        static::observe(new OrderObserver());
+    }
 
     protected $casts = [
         'selected_attributes' => 'array'

@@ -14,5 +14,6 @@
     "Payment": true,
     "Ticket": true,
     "Notification": true,
-    "User": true
+    "User": true,
+    "Home": true
 }

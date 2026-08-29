@@ -37,4 +37,9 @@ class CategoryRepository
     {
         $category->delete();
     }
+
+    public function getForHome()
+    {
+        return Category::with('parent')->get();
+    }
 }

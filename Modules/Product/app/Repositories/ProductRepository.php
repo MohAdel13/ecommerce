@@ -104,4 +104,47 @@ class ProductRepository
     {
         $product->offers()->sync($offerIds);
     }
+
+    public function getBestOffers(int $limit = 10)
+    {
+        return Product::with(['offers', 'categories', 'variants', 'defaultVariant'])
+            ->whereHas('offers', function ($q) {
+                $q->where('is_active', true)
+                    ->where('starts_at', '<=', now())
+                    ->where(function ($q) {
+                        $q->whereNull('ends_at')
+                            ->orWhere('ends_at', '>=', now());
+                    });
+            })
+            ->withMax(
+                [
+                    'offers as best_discount' => function ($q) {
+                        $q->where('is_active', true)
+                            ->where('starts_at', '<=', now())
+                            ->where(function ($q) {
+                                $q->whereNull('ends_at')
+                                    ->orWhere('ends_at', '>=', now());
+                            });
+                    },
+                ],
+                'discount_value'
+            )
+            ->orderByDesc('best_discount')
+            ->take($limit)
+            ->get();
+    }
+
+    public function getBestSelling(int $limit = 10)
+    {
+        return Product::with([
+            'offers',
+            'categories',
+            'variants',
+            'defaultVariant',
+        ])
+            ->withSum('orderItems as sold_count', 'quantity')
+            ->orderByDesc('sold_count')
+            ->take($limit)
+            ->get();
+    }
 }

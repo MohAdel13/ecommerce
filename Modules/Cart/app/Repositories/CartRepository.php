@@ -43,4 +43,11 @@ class CartRepository
     {
         $item->delete();
     }
+
+    public function getQuantityForUser(int $userId): int
+    {
+        $cart = $this->getOrCreateCart($userId);
+
+        return (int) $cart->cartItems()->sum('quantity');
+    }
 }

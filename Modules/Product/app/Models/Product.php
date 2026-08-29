@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Category\Models\Category;
 use Modules\Favourite\Models\Favourite;
 use Modules\Order\Models\OrderItem;
+use Modules\Product\Observers\ProductObserver;
 use Modules\Promotion\Models\Offer;
 use Modules\Tax\Models\Tax;
 use Spatie\MediaLibrary\HasMedia;
@@ -28,6 +29,11 @@ class Product extends Model implements HasMedia
     // {
     //     // return ProductFactory::new();
     // }
+
+    protected static function booted()
+    {
+        static::observe(new ProductObserver());
+    }
 
     protected $casts = [
         'features' => 'array'
@@ -102,5 +108,17 @@ class Product extends Model implements HasMedia
     public function getReviewsCountAttribute(): int
     {
         return $this->reviews()->count();
+    }
+
+    public function orderItems()
+    {
+        return $this->hasManyThrough(
+            OrderItem::class,
+            ProductVariant::class,
+            'product_id',
+            'product_variant_id',
+            'id',
+            'id'
+        );
     }
 }

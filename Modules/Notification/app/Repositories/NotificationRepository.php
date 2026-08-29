@@ -36,4 +36,11 @@ class NotificationRepository
     {
         return User::where('fcm_token', $fcm_token)?->first();
     }
+
+    public function getUnreadCount(int $userId): int
+    {
+        return Notification::where('user_id', $userId)
+            ->where('is_read', false)
+            ->count();
+    }
 }

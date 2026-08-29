@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Banner\Models\Banner;
+use Modules\Category\Observers\CategoryObserver;
 use Modules\Product\Models\Product;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -24,6 +25,11 @@ class Category extends Model implements HasMedia
     // {
     //     // return CategoryFactory::new();
     // }
+
+    protected static function booted()
+    {
+        static::observe(new CategoryObserver());
+    }
 
     public function getImageAttribute()
     {
