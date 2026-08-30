@@ -21,11 +21,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call(CategoryDatabaseSeeder::class);
-        // $this->call(ProductDatabaseSeeder::class);
-        // $this->call(ProductVariantSeeder::class);
-        // $this->call(BannerDatabaseSeeder::class);
-        // $this->call(PromotionDatabaseSeeder::class);
+        $this->call(CategoryDatabaseSeeder::class);
+        $this->call(ProductDatabaseSeeder::class);
+        $this->call(ProductVariantSeeder::class);
+        $this->call(BannerDatabaseSeeder::class);
+        $this->call(PromotionDatabaseSeeder::class);
         $this->call(TaxDatabaseSeeder::class);
     }
 }
